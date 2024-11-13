@@ -2,7 +2,8 @@ import time
 
 import pyautogui as p
 
-buttons = {"reply": '1_reply.png', "AI": '2_AI.png', "insert": '3_insert.png', "post": '4_post.png'}
+# 按键的字典字符串数据结构，中文字符的key对应图片全名的value
+buttons = {"回答": '1_reply.png', "豆包AI": '2_AI.png', "插入": '3_insert.png', "发布": '4_post.png'}
 
 
 # 点击按钮的通用函数
@@ -17,12 +18,13 @@ def click_button(button_name, confidence=0.9, wait_time=1):
         print(f"{button_name}按钮没找到")
 
 
+# 无限循环的主函数，按顺序循环点击对应出现的按钮
 if __name__ == '__main__':
     while True:
-        click_button('reply')
-        click_button('AI', wait_time=3)
-        click_button('insert', confidence=0.7)
-        click_button('post', confidence=0.7, )
+        click_button('回答')
+        click_button('豆包AI', wait_time=3)
+        click_button('插入', confidence=0.7)
+        click_button('发布', confidence=0.7, )
         p.click(10, 300)
         for _ in range(10):
             p.press("down")
