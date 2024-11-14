@@ -5,16 +5,18 @@ import pyautogui as p
 import xlrd
 
 
+# 鼠标点击事件
 def mouseclick(img, click_times, wait_time, key):
-        try:
-            locate = p.locateCenterOnScreen(image=img, confidence=0.9)
-            if locate is not None:
-                p.click(locate.x, locate.y, clicks=click_times, interval=0.2, duration=0.2, button=key)
-                time.sleep(wait_time)
-        except p.ImageNotFoundException:
-            print("未找到匹配样式")
+    try:
+        locate = p.locateCenterOnScreen(image=img, confidence=0.9)
+        if locate is not None:
+            p.click(locate.x, locate.y, clicks=click_times, interval=0.2, duration=0.2, button=key)
+            time.sleep(wait_time)
+    except p.ImageNotFoundException:
+        print("未找到匹配样式")
 
 
+# 主要任务
 def main_work():
     i = 1
     while i < sheet1.nrows:
@@ -32,6 +34,7 @@ def main_work():
         i += 1
 
 
+# 主程序的死循环
 if __name__ == '__main__':
     wb = xlrd.open_workbook("command.xls")
     sheet1 = wb.sheet_by_index(0)
