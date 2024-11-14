@@ -12,8 +12,10 @@ def mouseclick(img, click_times, wait_time, key):
         if locate is not None:
             p.click(locate.x, locate.y, clicks=click_times, interval=0.2, duration=0.2, button=key)
             time.sleep(wait_time)
+            return 1
     except p.ImageNotFoundException:
         print("未找到匹配样式")
+        return 0
 
 
 # 主要任务
@@ -25,8 +27,10 @@ def main_work():
         cmd_wait_time = sheet1.row(i)[3].value
         if cmd_type.value == "单击图标":
             img = sheet1.row(i)[1].value
-            mouseclick(img, 1, wait_time=cmd_wait_time, key="left")
-            print(f"{cmd_name}按钮已点击")
+            if mouseclick(img, 1, wait_time=cmd_wait_time, key="left"):
+                print(f"已执行{cmd_name}")
+            else:
+                print(f"无法执行{cmd_name}")
         elif cmd_type.value == "滚轮":
             p.scroll(-400, 10, 500)
             time.sleep(1)
